@@ -1,0 +1,34 @@
+api design
+
+-----------------user apis----------------
+first user flow apis
+    * user and admin signup flow
+    *signup flow
+        ->username,password,email,role(for user it is automatically set has user role and for admin have access to change roles)
+    *login flow 
+        ->user or admin enteres with username plus password
+            1. check wether the username and password is correct
+            2. then check the role by decoding the token
+    *forgot password flow
+        ->when a user or admin forgots there password they can reset based on email
+            1. the entered email is checked with the stored one 
+            2. If it is true then password is changed with the updated one
+
+----------------ticket apis---------------
+
+second ticket flow apis
+    * ticket creation flow
+        -> Both Users and Admins can create tickets
+            1. Validate token
+            2. Required fields: title, description, priority, category
+            3. Automatically set status to 'OPEN' and created_by to current user ID
+
+    * ticket update flow
+        -> Only ADMINs can update ticket details (status, priority, assignee)
+            1. Validate token and check if role is 'ADMIN'
+            2. Update specific fields (e.g., change status from 'OPEN' to 'IN_PROGRESS')
+            3. Log the update timestamp
+
+    * ticket viewing flow
+        -> Users/Agents can view tickets they are involved in
+        -> Admins can view all tickets

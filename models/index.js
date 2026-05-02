@@ -34,7 +34,7 @@ db.Sequelize = Sequelize;
 // Sync database
 const syncDb = async () => {
     try {
-        await sequelize.sync({ alter: true });
+        await sequelize.sync({ force: true });
         logger.info('✅ Database synchronized');
     } catch (error) {
         logger.error('❌ Error synchronizing database:', error);
